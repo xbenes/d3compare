@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>d3 compare example</title>
+        <style>
+            .info {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script src="filereader.js"></script>
+        <script src="d3.js"></script>
+        <script src="d3compare.min.js"></script>
+
+        <div class="info">
+        Load a text file containing analysed records, each record on separate line. Each row has a date and a value separated by comma.
+        <br />
+        The date has to be in
+        <a href="http://www.iso.org/iso/home/standards/iso8601.htm">ISO 8601</a> format.
+        and the value has to be numeric  (e.g. example of a row: 2014-07-24,14).
+        <br />
+
+        Sample data for download: <a href="data.txt">data.txt</a>.
+        </div>
+
+
+        <input type="file" id="file-input"></input>
+        <div class="info-message"></div>
+        <div class="vis" style="width: 900px; height: 300px;"></div>
+
+        <script>
+        /**
+        This example will visualize the comma-separated records in a
+        text file in the form of
+
+            2013-01-01,15
+            2013-01-02,20
+            2014-03-14,4
+
+        into a comparison chart
+        */
+
+
+        /**
+        Preprocess data from csv-similar rows to d3compare-compatible format
+        @param data in a form of comma-separated rows containing date and value
+        */
+        var preprocessData = function(data) {
+            var result = [],
+                monthNames = [ "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December" ];
+
+            data.forEach(function(d) {
+                var date = new Date(d[0]),
+                    value = isNaN(d[1]) ? null : parseFloat(d[1]);
+
+                // skip non-numbers
+                if (value === null)
+                    return;
+
+
+                var month = date.getMonth(),
+                    year = date.getFullYear();
+
+                // prepare month container, if not present
+                result[month] = result[month] || {
+                    monthName: monthNames[month],
+                    values: []
+                };
+
+                // under month container, find year container with value,
+                // create if not present and initiate with zero
+                var valueForYear = result[month].values.filter(function(v) {
+                    return v.year === year;
+                })[0];
+
+                if (!valueForYear) {
+                    valueForYear = {
+                        year: year,
+                        value: 0
+                    };
+                    result[month].values.push(valueForYear);
+                }
+
+                // both month and year container created,
+                // add currently processed value
+                valueForYear.value += parseFloat(value);
+            });
+            return result;
+        };
+
+        FileReaderJS.setupInput(document.getElementById('file-input'), {
+            readAsDefault: 'Text',
+            on: {
+                loadend: function(e, file) {
+                    var data = d3.csv.parseRows(e.target.result);
+
+                    // convert data to d3compare-compatible format
+                    // and visualize
+                    var processed = preprocessData(data);
+                    d3compare.visualize('.vis', processed);
+                }
+            }
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "d3compare",
+  "version": "0.0.1",
+  "description": "",
+  "main": "d3compare.js",
+  "author": "Petr Benes",
+  "devDependencies": {
+    "gulp": "~3.8.7",
+    "express": "~4.7.2",
+    "gulp-uglify": "~0.3.1",
+    "gulp-rename": "~1.2.0",
+    "del": "~0.1.1"
+  }
+}

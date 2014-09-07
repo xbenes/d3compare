@@ -1,0 +1,12 @@
+{
+  "name": "d3compare",
+  "version": "0.0.1",
+  "authors": [
+    "Petr Benes <xbenes@centrum.cz>"
+  ],
+  "private": true,
+  "dependencies": {
+    "filereader.js": "https://github.com/bgrins/filereader.js.git",
+    "d3": "~3.4.11"
+  }
+}

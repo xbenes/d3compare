@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple example</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <!-- load d3.js and d3compare -->
+        <script src="d3.js"></script>
+        <script src="d3compare.min.js"></script>
+
+        <!-- prepare div for rendering with required size -->
+        <div class="vis" style="width: 930px; height: 300px;"></div>
+
+        <!-- and set-up the visualization -->
+        <script>
+        var data = [
+            { monthName: 'January', values: [ { year: 2008, value: 4 }, { year: 2009, value: 6 }, { year: 2010, value: 8 } ] },
+            { monthName: 'February', values: [ { year: 2008, value: 5 }, { year: 2009, value: 8 }, { year: 2010, value: 11 } ] },
+            { monthName: 'March', values: [ { year: 2008, value: 4 }, { year: 2009, value: 10 }, { year: 2010, value: 13 } ] },
+            { monthName: 'April', values: [ { year: 2008, value: 7}, { year: 2009, value: 12 }, { year: 2010, value: 16 } ] },
+            { monthName: 'May', values: [ { year: 2008, value: 9 }, { year: 2009, value: 11 }, { year: 2010, value: 14 } ] },
+            { monthName: 'June', values: [ { year: 2008, value: 6 }, { year: 2009, value: 10 }, { year: 2010, value: 14 } ] },
+            { monthName: 'July', values: [ { year: 2008, value: 6 }, { year: 2009, value: 10 }, { year: 2010, value: 14 } ] },
+            { monthName: 'August', values: [ { year: 2008, value: 5 }, { year: 2009, value: 9 }, { year: 2010, value: 15 } ] },
+            { monthName: 'September', values: [ { year: 2008, value: 7 }, { year: 2009, value: 12 }, { year: 2010, value: 14 } ] },
+            { monthName: 'October', values: [ { year: 2008, value: 9 }, { year: 2009, value: 12 }, { year: 2010, value: 17 } ] },
+            { monthName: 'November', values: [ { year: 2008, value: 11 }, { year: 2009, value: 11 }, { year: 2010, value: 15 } ] },
+            { monthName: 'December', values: [ { year: 2008, value: 10 }, { year: 2009, value: 12 }, { year: 2010, value: 15 } ] },
+
+        ];
+        d3compare.visualize('.vis', data, {
+            legendMouse: true,
+            color: '#ff0000'
+        });
+        </script>
+
+    </body>
+</html>
