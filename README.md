@@ -1,4 +1,6 @@
 # D3 compare
+A small single-purpose visualization library written using d3.js. I wrote it to visualize arbitrary values per month in different years.
+![Example](https://github.com/xbenes/d3compare/raw/master/img/example.png "Example")
 
 ## Usage
 1. Load d3.js ([http://d3js.org](http://d3js.org/)) and d3compare.min.js (dist/d3compare.min.js) files.
